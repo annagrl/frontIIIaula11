@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-
+import swal from '@sweetalert/with-react';
 //Anna Gabriele Lopes, Jehan Lucas Vieira, André Wilson Padilha, Thiago Maurat Martins Dias, Wirley Da Silva Almeida, Octavio Augusto, Leticia Ferreira, João Eloi.
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         ) {
           errors.email = "Email invalido";
         }
-           if (!value.nome){
+           if (!values.nome){
           errors.nome = "Digite um nome";
         } else if (
           /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/.test(values.nome)
@@ -29,10 +29,10 @@ function App() {
           errors.nome = "Nome inválido"
         }
 
-          if (!value.telefone){
+          if (!values.telefone){
           errors.telefone = "Digite um telefone";          
         } else if(
-          /^(?:\+)[0-9]{2}\s?(?:\()[0-9]{2}(?:\))\s?[0-9]{4,5}(?:-)[0-9]{4}$/.test(value.telefone)
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.telefone)
         ){
           errors.telefone = "Telefone inválido"
         }
@@ -47,9 +47,11 @@ function App() {
           <input name="email" placeholder="Email" onChange={handleChange} />
           {errors.email && <span>{errors.email}</span>}
           <input name="nome" placeholder="Nome" onChange={handleChange} />
+          {errors.nome && <span>{errors.nome}</span>}
           <input name="telefone" placeholder="Telefone" onChange={handleChange} />
+          {errors.telefone && <span>{errors.telefone}</span>}
 
-          <button type="submit">Sumit</button>
+          <button type="submit">Submit</button>
         </form>
       )}
 
